@@ -1,0 +1,123 @@
+/* ==========================================================
+   Layout
+========================================================== */
+
+.container {
+
+    width: min(1280px, calc(100% - 48px));
+
+    margin-inline: auto;
+
+}
+
+section {
+
+    padding: 110px 0;
+
+    position: relative;
+
+    /* keep anchored sections clear of the fixed header */
+
+    scroll-margin-top: 84px;
+
+}
+
+.section-light {
+
+    background: #fff;
+
+}
+
+.section-soft {
+
+    background: var(--background);
+
+}
+
+.section-gradient {
+
+    background: var(--gradient-dark);
+
+}
+
+.grid {
+
+    display: grid;
+
+    gap: 32px;
+
+}
+
+.grid-2 {
+
+    grid-template-columns: repeat(2,1fr);
+
+}
+
+.grid-3 {
+
+    grid-template-columns: repeat(3,1fr);
+
+}
+
+.grid-4 {
+
+    grid-template-columns: repeat(4,1fr);
+
+}
+
+.flex {
+
+    display:flex;
+
+}
+
+.flex-center{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.flex-between{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.gap-sm{
+
+    gap:16px;
+
+}
+
+.gap{
+
+    gap:24px;
+
+}
+
+.gap-lg{
+
+    gap:40px;
+
+}
+
+@media(max-width:992px){
+
+.grid-2,
+.grid-3,
+.grid-4{
+
+grid-template-columns:1fr;
+
+}
+
+}
