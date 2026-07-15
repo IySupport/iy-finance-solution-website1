@@ -1,0 +1,44 @@
+/* ===========================
+   IY Finance Solutions
+   Design Tokens
+   Single source of truth for color, type and layout values.
+   Every other stylesheet should reference these variables
+   instead of repeating literal values.
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root{
+    /* Brand colors */
+    --primary:#006642;
+    --primary-dark:#004b30;
+    --secondary:#89C83B;
+    --secondary-dark:#6ea82f;
+    --secondary-light:#b6e37a;
+
+    /* Aliases used by existing components (hero stat cards) */
+    --teal-deep:var(--primary);
+    --lime-dark:var(--secondary-dark);
+
+    /* Neutrals */
+    --ink:#1a1a1a;
+    --ink-soft:#666666;
+    --paper:#ffffff;
+
+    /* Gradients */
+    --gradient-primary:linear-gradient(90deg, var(--primary), var(--secondary));
+    --gradient-dark:linear-gradient(135deg, var(--primary) 0%, #003b26 100%);
+
+    /* Typography — keeps the site's existing system-ui stack */
+    --font-main:system-ui, sans-serif;
+    --font-alt:system-ui, sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+    --weight-black:800;
+
+    /* Misc */
+    --logo-accent:var(--secondary);
+    --z-loader:9999;
+    --radius-sm:8px;
+    --radius-md:12px;
+    --radius-lg:20px;
+}

@@ -1,0 +1,466 @@
+/*======================================================
+ IY Finance Solutions
+ Animations
+======================================================*/
+
+/* ---------------------------------
+   Keyframes
+---------------------------------*/
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeRight {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes float {
+
+    0% {
+        transform: translateY(0px);
+    }
+
+    25% {
+        transform: translateY(-10px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    75% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+
+}
+
+@keyframes floatReverse {
+
+    0% {
+        transform: translateY(0px);
+    }
+
+    25% {
+        transform: translateY(10px);
+    }
+
+    50% {
+        transform: translateY(20px);
+    }
+
+    75% {
+        transform: translateY(10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+
+}
+
+@keyframes pulseGlow {
+
+    0% {
+        box-shadow: 0 0 0 rgba(12,174,96,.2);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(12,174,96,.35);
+    }
+
+    100% {
+        box-shadow: 0 0 0 rgba(12,174,96,.2);
+    }
+
+}
+
+@keyframes rotateSlow {
+
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+@keyframes shimmer {
+
+    0% {
+        background-position: -300px;
+    }
+
+    100% {
+        background-position: 300px;
+    }
+
+}
+
+/* ---------------------------------
+   Animation Classes
+---------------------------------*/
+
+.fade-up {
+
+    opacity: 0;
+
+    animation: fadeUp .8s ease forwards;
+
+}
+
+.fade-down {
+
+    opacity: 0;
+
+    animation: fadeDown .8s ease forwards;
+
+}
+
+.fade-left {
+
+    opacity: 0;
+
+    animation: fadeLeft .8s ease forwards;
+
+}
+
+.fade-right {
+
+    opacity: 0;
+
+    animation: fadeRight .8s ease forwards;
+
+}
+
+.zoom-in {
+
+    opacity: 0;
+
+    animation: zoomIn .7s ease forwards;
+
+}
+
+.float {
+
+    animation: float 6s ease-in-out infinite;
+
+}
+
+.float-slow {
+
+    animation: float 10s ease-in-out infinite;
+
+}
+
+.float-reverse {
+
+    animation: floatReverse 8s ease-in-out infinite;
+
+}
+
+.pulse {
+
+    animation: pulseGlow 3s infinite;
+
+}
+
+.rotate {
+
+    animation: rotateSlow 18s linear infinite;
+
+}
+
+/* ---------------------------------
+   Scroll Reveal
+---------------------------------*/
+
+.reveal {
+
+    opacity: 0;
+
+    transform: translateY(50px);
+
+    transition:
+
+        opacity .7s ease,
+
+        transform .7s ease;
+
+}
+
+.reveal.active {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+}
+
+/* ---------------------------------
+   Card Hover
+---------------------------------*/
+
+.hover-lift {
+
+    transition:
+
+        transform .35s ease,
+
+        box-shadow .35s ease;
+
+}
+
+.hover-lift:hover {
+
+    transform: translateY(-8px);
+
+    box-shadow: var(--shadow-green);
+
+}
+
+/* ---------------------------------
+   Buttons
+---------------------------------*/
+
+.btn {
+
+    transition:
+
+        background .3s ease,
+
+        transform .3s ease,
+
+        box-shadow .3s ease;
+
+}
+
+.btn:hover {
+
+    transform: translateY(-3px);
+
+}
+
+.btn:active {
+
+    transform: translateY(0);
+
+}
+
+/* ---------------------------------
+   Navbar
+---------------------------------*/
+
+.navbar {
+
+    transition:
+
+        background .35s ease,
+
+        padding .35s ease,
+
+        box-shadow .35s ease;
+
+}
+
+/* ---------------------------------
+   Hero Orbs
+---------------------------------*/
+
+.hero-orb {
+
+    position: absolute;
+
+    border-radius: 50%;
+
+    filter: blur(60px);
+
+    opacity: .35;
+
+    pointer-events: none;
+
+}
+
+.hero-orb.one {
+
+    width: 350px;
+
+    height: 350px;
+
+    background: rgba(165,255,214,.4);
+
+    top: -120px;
+
+    right: -80px;
+
+    animation: float 12s infinite ease-in-out;
+
+}
+
+.hero-orb.two {
+
+    width: 280px;
+
+    height: 280px;
+
+    background: rgba(12,174,96,.3);
+
+    left: -120px;
+
+    bottom: -80px;
+
+    animation: floatReverse 14s infinite ease-in-out;
+
+}
+
+/* ---------------------------------
+   Delay Utilities
+---------------------------------*/
+
+.delay-1 {
+    animation-delay: .1s;
+}
+
+.delay-2 {
+    animation-delay: .2s;
+}
+
+.delay-3 {
+    animation-delay: .3s;
+}
+
+.delay-4 {
+    animation-delay: .4s;
+}
+
+.delay-5 {
+    animation-delay: .5s;
+}
+
+.delay-6 {
+    animation-delay: .6s;
+}
+
+.delay-7 {
+    animation-delay: .7s;
+}
+
+.delay-8 {
+    animation-delay: .8s;
+}
+
+/* ---------------------------------
+   Accessibility
+---------------------------------*/
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation: none !important;
+
+        transition: none !important;
+
+        scroll-behavior: auto !important;
+
+    }
+
+}
+
+/* Ripple */
+
+.btn{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.ripple{
+
+    position:absolute;
+
+    border-radius:50%;
+
+    transform:scale(0);
+
+    animation:ripple .6s linear;
+
+    background:rgba(255,255,255,.45);
+
+    pointer-events:none;
+
+}
+
+@keyframes ripple{
+
+    to{
+
+        transform:scale(4);
+
+        opacity:0;
+
+    }
+
+}

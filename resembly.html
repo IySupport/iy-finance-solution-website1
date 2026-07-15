@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IY Finance Solution — Make your next money move</title>
+<!-- <link rel="preconnect" href="https://fonts.googleapis.com"> -->
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1B2A22;
+    --paper:#F7F4EC;
+    --paper-2:#F1ECDE;
+    --pine:#1F6F54;
+    --pine-dark:#154A38;
+    --brass:#C9A227;
+    --brass-dark:#a3830f;
+    --slate:#2E4756;
+    --line:#DAD2BA;
+    --white:#FFFFFF;
+    --muted:#5b6b62;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  h1,h2,h3{font-family:'Fraunces',serif;margin:0;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 32px;}
+  @media(max-width:640px){.wrap{padding:0 20px;}}
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;padding:18px 0;}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Fraunces',serif;font-weight:600;font-size:20px;letter-spacing:-0.01em;}
+  .logo .mark{
+    width:30px;height:30px;border-radius:7px;background:var(--pine);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--paper);font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;
+  }
+  .navlinks{display:flex;gap:30px;font-size:14.5px;font-weight:500;}
+  .navlinks a{opacity:0.82;transition:opacity .15s;}
+  .navlinks a:hover{opacity:1;}
+  .navcta{display:flex;align-items:center;gap:18px;font-size:14.5px;font-weight:500;}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;
+    padding:10px 20px;border-radius:5px;font-weight:600;font-size:14.5px;
+    cursor:pointer;border:1px solid transparent;white-space:nowrap;
+  }
+  .btn-primary{background:var(--pine);color:var(--white);}
+  .btn-primary:hover{background:var(--pine-dark);}
+  .btn-ghost{border-color:var(--ink);color:var(--ink);}
+  @media(max-width:900px){.navlinks{display:none;}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:64px 0 40px;border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:56px;align-items:center;}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:36px;}}
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--pine-dark);display:flex;align-items:center;gap:10px;margin-bottom:18px;
+  }
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--pine-dark);display:inline-block;}
+  .hero h1{
+    font-size:clamp(34px,4.6vw,54px);line-height:1.05;font-weight:600;letter-spacing:-0.015em;
+    margin-bottom:22px;
+  }
+  .hero h1 em{font-style:italic;color:var(--pine);font-weight:500;}
+  .hero p.lede{font-size:18px;line-height:1.55;color:var(--muted);max-width:480px;margin-bottom:30px;}
+  .search-box{
+    display:flex;gap:10px;background:var(--white);border:1px solid var(--line);
+    border-radius:8px;padding:6px;margin-bottom:18px;max-width:520px;
+  }
+  .search-box input{
+    flex:1;border:none;outline:none;background:transparent;font-family:'Inter',sans-serif;
+    font-size:15px;padding:10px 12px;color:var(--ink);
+  }
+  .search-box button{border:none;border-radius:5px;background:var(--brass);color:var(--ink);
+    font-weight:700;padding:0 20px;cursor:pointer;font-size:14.5px;}
+  .search-box button:hover{background:var(--brass-dark);color:var(--white);}
+  .quicktags{display:flex;flex-wrap:wrap;gap:8px;}
+  .quicktags span{
+    font-size:13px;padding:6px 12px;border:1px solid var(--line);border-radius:20px;color:var(--muted);
+    font-weight:500;
+  }
+
+  /* ledger hero card */
+  .ledger-card{
+    background:var(--white);border:1px solid var(--line);border-radius:14px;overflow:hidden;
+    box-shadow:0 18px 40px -22px rgba(27,42,34,0.35);
+  }
+  .ledger-card img{width:100%;height:230px;object-fit:cover;}
+  .ledger-rows{padding:20px 22px 22px;}
+  .ledger-title{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+  .ledger-row{
+    display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;
+    border-top:1px dashed var(--line);font-size:14.5px;
+  }
+  .ledger-row:first-of-type{border-top:none;}
+  .ledger-row .label{color:var(--ink);font-weight:500;}
+  .ledger-row .value{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--pine-dark);}
+  .ledger-row .value.up{color:var(--pine-dark);}
+  .ledger-row .value.up::before{content:'▲ ';font-size:10px;}
+
+  /* ---------- stat strip ---------- */
+  .stats{padding:36px 0;border-bottom:1px solid var(--line);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;}
+  @media(max-width:800px){.stats-grid{grid-template-columns:repeat(2,1fr);row-gap:26px;}}
+  .stat{padding:0 24px;border-left:1px solid var(--line);}
+  .stat:first-child{border-left:none;padding-left:0;}
+  @media(max-width:800px){.stat:nth-child(odd){border-left:none;padding-left:0;}}
+  .stat .num{font-family:'IBM Plex Mono',monospace;font-size:30px;font-weight:600;color:var(--pine-dark);}
+  .stat .cap{font-size:13.5px;color:var(--muted);margin-top:4px;}
+
+  /* ---------- section heading ---------- */
+  .section{padding:64px 0;border-bottom:1px solid var(--line);}
+  .section-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:34px;gap:20px;}
+  .section-head h2{font-size:clamp(26px,3vw,34px);font-weight:600;letter-spacing:-0.01em;}
+  .section-head .sub{color:var(--muted);font-size:15px;margin-top:8px;max-width:460px;}
+  .section-head a.view-all{font-size:14px;font-weight:600;color:var(--pine-dark);white-space:nowrap;border-bottom:1px solid var(--pine-dark);padding-bottom:2px;}
+
+  /* ---------- category grid ---------- */
+  .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media(max-width:900px){.cat-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.cat-grid{grid-template-columns:1fr;}}
+  .cat-card{
+    background:var(--white);border:1px solid var(--line);border-radius:12px;overflow:hidden;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .cat-card:hover{transform:translateY(-3px);box-shadow:0 16px 30px -20px rgba(27,42,34,0.4);}
+  .cat-card .thumb{height:140px;overflow:hidden;position:relative;}
+  .cat-card .thumb img{width:100%;height:100%;object-fit:cover;}
+  .cat-card .thumb .badge{
+    position:absolute;top:12px;left:12px;background:rgba(247,244,236,0.92);
+    font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
+    padding:4px 9px;border-radius:4px;color:var(--pine-dark);font-weight:600;
+  }
+  .cat-body{padding:18px 20px 20px;}
+  .cat-body h3{font-size:19px;font-weight:600;margin-bottom:6px;}
+  .cat-body p{font-size:14px;color:var(--muted);line-height:1.5;margin:0 0 12px;}
+  .cat-body .link{font-size:13.5px;font-weight:600;color:var(--pine-dark);}
+
+  /* ---------- featured picks ---------- */
+  .picks{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media(max-width:900px){.picks{grid-template-columns:1fr;}}
+  .pick{
+    background:var(--white);border:1px solid var(--line);border-radius:12px;padding:24px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .pick .rank{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--muted);letter-spacing:.08em;}
+  .pick h3{font-size:19px;font-weight:600;}
+  .pick .rate{
+    display:flex;justify-content:space-between;padding:12px 0;border-top:1px dashed var(--line);
+    border-bottom:1px dashed var(--line);margin:4px 0;
+  }
+  .pick .rate .k{font-size:13px;color:var(--muted);}
+  .pick .rate .v{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:15px;color:var(--pine-dark);}
+  .pick p.desc{font-size:14px;color:var(--muted);line-height:1.5;margin:0;}
+  .pick .btn{margin-top:6px;align-self:flex-start;}
+
+  /* ---------- calculator split ---------- */
+  .calc-split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  @media(max-width:900px){.calc-split{grid-template-columns:1fr;gap:32px;}}
+  .calc-split img{border-radius:12px;width:100%;height:340px;object-fit:cover;}
+  .calc-copy .eyebrow{margin-bottom:14px;}
+  .calc-copy h2{font-size:clamp(26px,3vw,32px);margin-bottom:16px;font-weight:600;}
+  .calc-copy p{color:var(--muted);font-size:15.5px;line-height:1.6;margin-bottom:22px;max-width:440px;}
+  .calc-fields{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px;}
+  .field{background:var(--white);border:1px solid var(--line);border-radius:8px;padding:12px 16px;flex:1;min-width:140px;}
+  .field .k{font-size:12px;color:var(--muted);margin-bottom:4px;}
+  .field .v{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:17px;}
+
+  /* ---------- articles ---------- */
+  .articles{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  @media(max-width:900px){.articles{grid-template-columns:1fr;}}
+  .article{border-radius:12px;overflow:hidden;background:var(--white);border:1px solid var(--line);}
+  .article img{height:170px;object-fit:cover;width:100%;}
+  .article-body{padding:18px 20px 22px;}
+  .article-body .tag{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--pine-dark);margin-bottom:8px;display:block;}
+  .article-body h3{font-size:17px;font-weight:600;line-height:1.35;margin-bottom:8px;}
+  .article-body p{font-size:13.5px;color:var(--muted);line-height:1.5;margin:0;}
+
+  /* ---------- CTA banner ---------- */
+  .cta-banner{
+    background:var(--pine-dark);color:var(--paper);border-radius:16px;overflow:hidden;
+    display:grid;grid-template-columns:1.1fr 0.9fr;align-items:center;
+  }
+  @media(max-width:800px){.cta-banner{grid-template-columns:1fr;}}
+  .cta-copy{padding:48px;}
+  .cta-copy h2{color:var(--white);font-size:clamp(24px,3vw,32px);margin-bottom:14px;}
+  .cta-copy p{color:#D7E4DD;font-size:15.5px;line-height:1.6;margin-bottom:24px;max-width:420px;}
+  .cta-banner img{height:100%;width:100%;object-fit:cover;min-height:260px;}
+  .btn-brass{background:var(--brass);color:var(--ink);}
+  .btn-brass:hover{background:#e0b62f;}
+
+  /* ---------- footer ---------- */
+  footer{padding:56px 0 40px;}
+  .foot-grid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:32px;margin-bottom:40px;}
+  @media(max-width:900px){.foot-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:560px){.foot-grid{grid-template-columns:1fr;}}
+  .foot-brand .logo{margin-bottom:14px;}
+  .foot-brand p{font-size:14px;color:var(--muted);line-height:1.6;max-width:280px;}
+  .foot-col h4{font-family:'IBM Plex Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px;}
+  .foot-col ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  .foot-col a{font-size:14px;color:var(--ink);opacity:0.85;}
+  .foot-col a:hover{opacity:1;text-decoration:underline;}
+  .foot-bottom{
+    border-top:1px solid var(--line);padding-top:22px;display:flex;justify-content:space-between;
+    flex-wrap:wrap;gap:12px;font-size:12.5px;color:var(--muted);
+  }
+  .foot-bottom .fine{max-width:720px;line-height:1.6;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="mark">iy</span> IY Finance Solution</div>
+    <nav class="navlinks">
+      <a href="#credit-cards">Credit Cards</a>
+      <a href="#banking">Banking</a>
+      <a href="#loans">Loans</a>
+      <a href="#investing">Investing</a>
+      <a href="#insurance">Insurance</a>
+      <a href="#learn">Learn</a>
+    </nav>
+    <div class="navcta">
+      <a href="#">Sign in</a>
+      <a href="#" class="btn btn-primary">Get started</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Personal finance, plainly explained</div>
+      <h1>Make your next <em>money move</em> with confidence.</h1>
+      <p class="lede">Compare credit cards, savings accounts, loans, and investments side by side — with real numbers, no hidden fine print, and nothing to sign up for just to look.</p>
+      <div class="search-box">
+        <input type="text" placeholder="Try “best cash back card” or “refinance my mortgage”">
+        <button>Search</button>
+      </div>
+      <div class="quicktags">
+        <span>Cash back cards</span>
+        <span>High-yield savings</span>
+        <span>Personal loans</span>
+        <span>Free credit score</span>
+      </div>
+    </div>
+    <div class="ledger-card">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&auto=format&fit=crop&q=80" alt="Person planning finances at a laptop with notes">
+      <div class="ledger-rows">
+        <div class="ledger-title">Today's snapshot</div>
+        <div class="ledger-row"><span class="label">Avg. high-yield savings APY</span><span class="value up mono">4.35%</span></div>
+        <div class="ledger-row"><span class="label">Top cash back card</span><span class="value mono">5% rotating</span></div>
+        <div class="ledger-row"><span class="label">30-yr fixed mortgage, avg.</span><span class="value mono">6.42%</span></div>
+        <div class="ledger-row"><span class="label">People helped this month</span><span class="value up mono">184,300</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stats-grid">
+    <div class="stat"><div class="num mono">12.4M+</div><div class="cap">people compare products with us each year</div></div>
+    <div class="stat"><div class="num mono">340+</div><div class="cap">banks, lenders & issuers on the platform</div></div>
+    <div class="stat"><div class="num mono">4.8 / 5</div><div class="cap">average rating from verified users</div></div>
+    <div class="stat"><div class="num mono">$0</div><div class="cap">cost to compare — we're paid by partners, not you</div></div>
+  </div>
+</section>
+
+<section class="section" id="explore">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Explore by money goal</h2>
+        <div class="sub">Six starting points. Pick the one that matches what you're actually trying to do this month.</div>
+      </div>
+    </div>
+    <div class="cat-grid">
+
+      <div class="cat-card" id="credit-cards">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1589758438368-0ad531db3366?w=700&auto=format&fit=crop&q=80" alt="Credit card on a light surface">
+          <span class="badge">Credit Cards</span>
+        </div>
+        <div class="cat-body">
+          <h3>Find a card that pays you back</h3>
+          <p>Cash back, travel points, and 0% intro APR offers, sorted by what actually matters for your spending.</p>
+          <a class="link" href="#">Compare cards →</a>
+        </div>
+      </div>
+
+      <div class="cat-card" id="banking">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?w=700&auto=format&fit=crop&q=80" alt="Plant growing from coins, representing savings growth">
+          <span class="badge">Banking</span>
+        </div>
+        <div class="cat-body">
+          <h3>Put your cash to work</h3>
+          <p>High-yield savings and checking accounts with no monthly fees, ranked by real annual yield.</p>
+          <a class="link" href="#">Compare accounts →</a>
+        </div>
+      </div>
+
+      <div class="cat-card" id="loans">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=700&auto=format&fit=crop&q=80" alt="Person writing on paper documents at a desk">
+          <span class="badge">Loans</span>
+        </div>
+        <div class="cat-body">
+          <h3>Borrow without surprises</h3>
+          <p>Personal loans, auto loans, and student loan refinancing — see your real rate before you apply.</p>
+          <a class="link" href="#">Compare loans →</a>
+        </div>
+      </div>
+
+      <div class="cat-card" id="mortgages">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1560472355-536de3962603?w=700&auto=format&fit=crop&q=80" alt="Brown leather wallet, personal finance">
+          <span class="badge">Mortgages</span>
+        </div>
+        <div class="cat-body">
+          <h3>Buy or refinance smarter</h3>
+          <p>Today's mortgage rates by lender and loan type, plus a payment calculator that shows the whole picture.</p>
+          <a class="link" href="#">See mortgage rates →</a>
+        </div>
+      </div>
+
+      <div class="cat-card" id="investing">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1707779491435-000c45820db2?w=700&auto=format&fit=crop&q=80" alt="Calculator and laptop set up for financial planning">
+          <span class="badge">Investing</span>
+        </div>
+        <div class="cat-body">
+          <h3>Start or grow a portfolio</h3>
+          <p>Brokerage and robo-advisor comparisons, retirement account guidance, and low-fee index options.</p>
+          <a class="link" href="#">Compare brokers →</a>
+        </div>
+      </div>
+
+      <div class="cat-card" id="insurance">
+        <div class="thumb">
+          <img src="https://images.unsplash.com/photo-1631511258193-252ab3da6b8b?w=700&auto=format&fit=crop&q=80" alt="Calculator, pen, and money on a table">
+          <span class="badge">Insurance</span>
+        </div>
+        <div class="cat-body">
+          <h3>Cover what matters</h3>
+          <p>Auto, home, and life insurance quotes from multiple carriers, side by side, in minutes.</p>
+          <a class="link" href="#">Get quotes →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>This month's top picks</h2>
+        <div class="sub">Our editorial team's current favorites, re-checked against live rates every week.</div>
+      </div>
+      <a class="view-all" href="#">See full rankings →</a>
+    </div>
+    <div class="picks">
+
+      <div class="pick">
+        <div class="rank mono">PICK — CASH BACK</div>
+        <h3>Everyday Rewards Card</h3>
+        <div class="rate"><span class="k">Cash back</span><span class="v">Up to 5%</span></div>
+        <div class="rate"><span class="k">Annual fee</span><span class="v">$0</span></div>
+        <p class="desc">Best for people who want simple, flat rewards on groceries and gas without tracking rotating categories.</p>
+        <a class="btn btn-primary">View details</a>
+      </div>
+
+      <div class="pick">
+        <div class="rank mono">PICK — SAVINGS</div>
+        <h3>Horizon High-Yield Savings</h3>
+        <div class="rate"><span class="k">APY</span><span class="v">4.35%</span></div>
+        <div class="rate"><span class="k">Minimum balance</span><span class="v">$0</span></div>
+        <p class="desc">No monthly fees, no minimums, and a rate that's stayed competitive for the last six rate cycles.</p>
+        <a class="btn btn-primary">View details</a>
+      </div>
+
+      <div class="pick">
+        <div class="rank mono">PICK — PERSONAL LOAN</div>
+        <h3>Clearpath Personal Loan</h3>
+        <div class="rate"><span class="k">APR range</span><span class="v">7.9%–18.5%</span></div>
+        <div class="rate"><span class="k">Funding time</span><span class="v">1–2 days</span></div>
+        <p class="desc">Checking your rate takes two minutes and won't affect your credit score until you formally apply.</p>
+        <a class="btn btn-primary">View details</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap calc-split">
+    <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=900&auto=format&fit=crop&q=80" alt="Laptop open on a desk with notebook, used for financial planning">
+    <div class="calc-copy">
+      <div class="eyebrow">Free tool</div>
+      <h2>See exactly what a loan or card will cost you — before you commit.</h2>
+      <p>Enter a balance, a rate, and a timeline. We'll show you the total interest, the payoff date, and what changes if you pay a little more each month.</p>
+      <div class="calc-fields">
+        <div class="field"><div class="k">Balance</div><div class="v mono">$8,400</div></div>
+        <div class="field"><div class="k">APR</div><div class="v mono">14.9%</div></div>
+        <div class="field"><div class="k">Payoff time</div><div class="v mono">26 mo.</div></div>
+      </div>
+      <a class="btn btn-primary" href="#">Open the calculator</a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="learn">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>Learn the moves behind the numbers</h2>
+        <div class="sub">Short, practical reads — no jargon, no fear-mongering.</div>
+      </div>
+      <a class="view-all" href="#">Visit the blog →</a>
+    </div>
+    <div class="articles">
+
+      <div class="article">
+        <img src="https://images.unsplash.com/photo-1542744173-05336fcc7ad4?w=700&auto=format&fit=crop&q=80" alt="Person using a laptop to review finances">
+        <div class="article-body">
+          <span class="tag">Credit</span>
+          <h3>What actually moves your credit score, ranked by impact</h3>
+          <p>Payment history matters more than people think — and closing old cards can quietly hurt you.</p>
+        </div>
+      </div>
+
+      <div class="article">
+        <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=700&auto=format&fit=crop&q=80" alt="Person holding a card while using a laptop">
+        <div class="article-body">
+          <span class="tag">Banking</span>
+          <h3>How to build a starter emergency fund in 90 days</h3>
+          <p>A simple three-step plan for setting aside your first $1,000 without a strict budget.</p>
+        </div>
+      </div>
+
+      <div class="article">
+        <img src="https://images.unsplash.com/photo-1707157284454-553ef0a4ed0d?w=700&auto=format&fit=crop&q=80" alt="Desk with financial planning materials">
+        <div class="article-body">
+          <span class="tag">Investing</span>
+          <h3>Index funds vs. target-date funds: which fits you?</h3>
+          <p>Both are low-effort. The right pick depends mostly on how close you are to retirement.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section" style="border-bottom:none;">
+  <div class="wrap">
+    <div class="cta-banner">
+      <div class="cta-copy">
+        <h2>Check your credit score — for free, forever.</h2>
+        <p>No credit card required, no hit to your score, and no surprise upsells. Just the number, updated weekly, with a plain-language breakdown of what's helping and what's hurting.</p>
+        <a class="btn btn-brass" href="#">Get my free score</a>
+      </div>
+      <img src="https://images.unsplash.com/photo-1631511258193-252ab3da6b8b?w=900&auto=format&fit=crop&q=80" alt="Calculator and financial documents on a table">
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo"><span class="mark">iy</span> IY Finance Solution</div>
+        <p>Independent comparisons and plain-English guidance for credit cards, banking, loans, investing, and insurance.</p>
+      </div>
+      <div class="foot-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#">Credit cards</a></li>
+          <li><a href="#">Banking</a></li>
+          <li><a href="#">Loans</a></li>
+          <li><a href="#">Mortgages</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Learn</h4>
+        <ul>
+          <li><a href="#">Credit basics</a></li>
+          <li><a href="#">Investing 101</a></li>
+          <li><a href="#">Calculators</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy</a></li>
+          <li><a href="#">Terms</a></li>
+          <li><a href="#">Advertiser disclosure</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 IY Finance Solution. All rights reserved.</span>
+      <span class="fine">IY Finance Solution is a comparison and information service, not a lender, bank, or broker. Rates and offers shown are for illustration and change frequently — confirm current terms directly with the provider before applying.</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

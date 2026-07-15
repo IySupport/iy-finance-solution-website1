@@ -1,0 +1,411 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+}
+
+:root{
+    --primary:#006642;
+    --secondary:#89C83B;
+    --primary-light: rgba(0,102,66,0.08);
+    --secondary-light: rgba(137,200,59,0.12);
+    --accent-glow:#a8ea4c;
+    --glass-light: rgba(255,255,255,0.55);
+    --glass-border: rgba(255,255,255,0.4);
+}
+
+/* ============================= */
+/* HEADER                        */
+/* ============================= */
+
+/* The whole header sits on top of the hero and starts transparent so the
+   hero image shows through. Once the user scrolls, it switches to a
+   frosted glassmorphism look; scrolling back to the top reverses it. */
+#header{
+    width:100%;
+    position:fixed;
+    top:0;
+    z-index:1000;
+}
+
+/* Top Section (contact bar) */
+.contact_header{
+    background:transparent;
+    color:#ffffff;
+    font-weight:bold;
+    padding:8px 0;
+    transition:background 0.35s ease, padding 0.35s ease;
+}
+
+.contact_container{
+    width:100%;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    gap:30px;
+    padding:0 20px;
+}
+
+.contact_item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:12px;
+}
+.contact_item i{
+    color:#ffffff;
+}
+
+/* Bottom Section (logo + nav) */
+.nav_header{
+    background:transparent;
+    box-shadow:none;
+    transition:background 0.35s ease, box-shadow 0.35s ease, backdrop-filter 0.35s ease;
+}
+
+.container{
+    width:100%;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 15px;
+}
+
+.first_container{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    justify-content:flex-start;
+}
+.logo{
+    width: 50px;
+    height: 60px;
+    object-fit: contain;
+    padding: 5px;
+}
+.company_name{
+    display:flex;
+    flex-direction:column;
+    font-size: 14px;
+    font-weight:bolder;
+}
+.company_name span:nth-child(1){
+    font-size: 20px;
+    font-weight:bold;
+    color:#ffffff;
+    transition:color 0.35s ease;
+}
+.company_name span:nth-child(2){
+    font-size: 21px;
+    font-weight:normal;
+    color:var(--accent-glow);
+    transition:color 0.35s ease;
+}
+
+.nav-links{
+    display:flex;
+    list-style:none;
+    gap:25px;
+    margin:0;
+    padding:0;
+}
+
+.nav-links a{
+    text-decoration:none;
+    color:#ffffff;
+    font-weight:bold;
+    transition:color 0.35s ease;
+}
+
+/* Glassmorphism state once the page has scrolled past the hero */
+#header.scrolled .contact_header{
+    background:rgba(0,102,66,0.55);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    padding:5px 0;
+}
+
+#header.scrolled .nav_header{
+    background:rgba(255,255,255,0.65);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    box-shadow:0 4px 20px rgba(0,0,0,0.1);
+}
+
+#header.scrolled .company_name span:nth-child(1){
+    color:var(--primary);
+}
+#header.scrolled .company_name span:nth-child(2){
+    color:var(--secondary);
+}
+#header.scrolled .nav-links a{
+    color:#000000;
+}
+
+/* ============================= */
+/* HERO SECTION                  */
+/* ============================= */
+.hero{
+    position:relative;
+    width:100%;
+    display:flex;
+    align-items:center;
+    padding:0 45px;
+    min-height:700px;
+    background-image:url('assets/images/hero-background.png');
+    background-size:cover;
+    background-position:right center;
+    overflow:hidden;
+}
+
+.hero-overlay{
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        90deg,
+        var(--primary) 0%,
+        rgba(0,102,66,0.9) 40%,
+        rgba(0,102,66,0.5) 70%,
+        rgba(0,102,66,0) 100%
+    );
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+
+    width:65%;
+    max-width:800px;
+
+    padding:40px 80px;
+
+    background:rgba(255,255,255,0.12);
+    backdrop-filter:blur(5px);
+    -webkit-backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:30px;
+
+    box-shadow:
+        0 8px 32px rgba(0,0,0,0.15),
+        inset 0 1px 1px rgba(255,255,255,0.3);
+
+    color:#fff;
+}
+
+.hero-content h1{
+    font-size:40px;
+    line-height:1.1;
+    font-weight:700;
+    margin-bottom:20px;
+    letter-spacing:-1px;
+}
+
+.hero-content h1 span{
+    color:var(--accent-glow);
+}
+
+.hero-content p{
+    font-size:20px;
+    line-height:1.8;
+    color:rgba(255,255,255,0.9);
+    max-width:650px;
+}
+
+.hero-content::before{
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:32px;
+    background:linear-gradient(
+        135deg,
+        rgba(168,234,76,0.5),
+        rgba(255,255,255,0.1),
+        rgba(0,132,111,0.4)
+    );
+    z-index:-1;
+}
+
+.hero-badge{
+    display:inline-block;
+    padding:10px 18px;
+    margin-bottom:20px;
+
+    background:rgba(168,234,76,0.15);
+    border:1px solid rgba(168,234,76,0.3);
+
+    color:var(--accent-glow);
+    border-radius:50px;
+    font-size:14px;
+    font-weight:600;
+}
+
+/* ============================= */
+/* SERVICES SECTION               */
+/* ============================= */
+
+/* A soft brand-tinted backdrop instead of flat grey, so the section reads
+   as part of the same identity as the hero rather than a generic panel. */
+.services-section{
+    position:relative;
+    background:linear-gradient(180deg, #ffffff 0%, var(--secondary-light) 45%, var(--primary-light) 100%);
+    padding-bottom:100px;
+}
+
+/* The glass panel that overlaps the hero and holds every service card */
+.service-content{
+    width:calc(100% - 100px);
+    margin:-140px auto 0 auto;
+    position:relative;
+    z-index:10;
+
+    padding:40px;
+    border-radius:32px;
+
+    background:var(--glass-light);
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    border:1px solid var(--glass-border);
+
+    box-shadow:
+        0 25px 60px rgba(0,102,66,.18),
+        inset 0 1px 1px rgba(255,255,255,.5);
+}
+
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:16px;
+}
+
+/* SERVICE CARD */
+.service-card{
+    background:rgba(255,255,255,0.9);
+    padding:22px 18px;
+    border-radius:18px;
+    transition:.3s;
+    box-shadow:0 5px 20px rgba(0,0,0,.05);
+    text-align:left;
+}
+
+.service-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 35px rgba(0,102,66,.18);
+}
+
+.service-icon{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg, var(--primary), var(--secondary));
+    margin-bottom:16px;
+}
+
+.service-icon i{
+    color:white;
+    font-size:20px;
+}
+
+.service-card h3{
+    font-size:16px;
+    margin-bottom:10px;
+    color:#222;
+    line-height:1.25;
+}
+
+.service-card p{
+    color:#666;
+    line-height:1.5;
+    margin-bottom:14px;
+    font-size:12.5px;
+}
+
+.service-link{
+    color:var(--primary);
+    font-weight:600;
+    text-decoration:none;
+    font-size:13px;
+}
+
+/* ============================= */
+/* RESPONSIVE                     */
+/* ============================= */
+
+@media(max-width:1200px){
+    .services-grid{
+        grid-template-columns:repeat(3,1fr);
+    }
+}
+
+@media(max-width:992px){
+    .hero-content{
+        width:90%;
+        padding:40px;
+    }
+    .hero-content h1{
+        font-size:42px;
+    }
+    .service-content{
+        width:calc(100% - 40px);
+    }
+}
+
+@media(max-width:768px){
+    .hero{
+        padding:20px;
+        min-height:auto;
+        padding-top:140px;
+        padding-bottom:60px;
+    }
+    .hero-content{
+        width:100%;
+        padding:30px;
+        border-radius:20px;
+    }
+    .hero-content h1{
+        font-size:32px;
+    }
+    .hero-content p{
+        font-size:16px;
+    }
+
+    .contact_container{
+        justify-content:center;
+        flex-wrap:wrap;
+        gap:12px;
+        text-align:center;
+    }
+    .container{
+        flex-direction:column;
+        gap:10px;
+    }
+    .nav-links{
+        gap:15px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .services-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+    .service-content{
+        width:calc(100% - 20px);
+        margin:-100px auto 0 auto;
+        padding:20px;
+    }
+}
+
+@media(max-width:480px){
+    .services-grid{
+        grid-template-columns:1fr;
+    }
+    .contact_item span{
+        font-size:11px;
+    }
+}
